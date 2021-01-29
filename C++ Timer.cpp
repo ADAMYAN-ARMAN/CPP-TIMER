@@ -35,9 +35,9 @@ int main()
 	system("cls");
 	
 	try {
-		if (choice!="0" && choice!="1"){
+		if (choice!="0" && choice!="1")
 			throw 1;
-		}
+		
 	}
 	
 	catch (int a){
@@ -46,13 +46,13 @@ int main()
 	}
 	
 	
-	if (choice=="0"){
+	if (choice=="0")
 		ob.starttime();
-	}
 	
-	if (choice=="1"){
+	
+	if (choice=="1")
 		ob.timer();
-	}
+	
 	
 	
 	system("cls");
@@ -68,11 +68,9 @@ inline bool Clock::forcheckdigit (string a)
     if(a.size()==0) return false;
     
     
-	for(unsigned int i=0; i<a.size(); i++) {
-	    if((a[i]>='0' && a[i]<='9')==false) {
-	    	return false;
-	    }
-	}
+	for(unsigned int i=0; i<a.size(); i++)
+	    if((a[i]>='0' && a[i]<='9')==false)	return false;
+	
 	    
 	return true;
 }
@@ -83,9 +81,7 @@ inline bool Clock::forcheckdigit (string a)
 
 
 inline bool Clock::forcheckint (int k){
-	if (k>=0 && k<60){
-		return false;
-	}
+	if (k>=0 && k<60) return false;
 	
 		return true;
 }
@@ -148,7 +144,7 @@ inline void Clock::clock(){
 	
 	//Distance with '|' for hour, minute and second
 	cout<<"|"<<setfill (' ') <<setw (--*a)<<h;
-	cout<<setfill (' ') <<setw ((*b)++);
+	cout<<setfill (' ') <<setw (++*b);
 	
 	cout<<"|"<<setfill (' ') <<setw (*a+1)<<m;
 	cout<<setfill (' ') <<setw (*b);
@@ -167,17 +163,20 @@ inline void Clock::clock(){
 
 void Clock::starttime (){
 	starttime:
-		Sleep (882);
-		++s;
+		/*850 ms = 0.850 sec. I write 850ms instead 1000ms (1 second),
+		because there are many conditions, functions and cycles in my code.
+		Those ones spend a little time.*/
+		Sleep (850);
 		system ("cls");
 		clock();
+		++s;
 	
-	if (s==59){
+	if (s==60){
 		s=0;
 		++m;
 	}
 	
-	if (m==59){
+	if (m==60){
 		s=0;
 		m=0;
 		++h;
@@ -253,20 +252,21 @@ void Clock::timer (){
 	
 	
 	starttime:
-		/*885 ms = 0.885 sec. I write 885 ms instead 1000ms (1 second),
+		/*863 ms = 0.863 sec. I write 863ms instead 1000ms (1 second),
 		because there are many conditions, functions and cycles in my code.
 		Those ones spend a little time.*/	
-		Sleep (885);
-		++s;
+		Sleep (863);
 		system ("cls");
 		clock();
+		++s;
+
 	
-	if (s==59){
+	if (s==60){
 		s=0;
 		++m;
 	}
 	
-	if (m==59){
+	if (m==60){
 		s=0;
 		m=0;
 		++h;
@@ -274,6 +274,8 @@ void Clock::timer (){
 	
 	if (s==fs && m==fm && h==fh){
 		//523 is hz, 3000 is 3 second
+		system ("cls");
+		clock();
 		Beep(523,3000);
 		system("pause");
 		exit(1);
